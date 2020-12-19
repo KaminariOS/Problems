@@ -2,7 +2,6 @@ package CowEatingGrass;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -55,8 +54,8 @@ public class Cow {
 
     public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
-         File file = new File("src/test.md");
-         scanner = new Scanner(file);
+        // File file = new File("src/test.md");
+        // scanner = new Scanner(file);
         int cowCount = scanner.nextInt();
         Cow[] cows = new Cow[cowCount];
         int i = 0;
