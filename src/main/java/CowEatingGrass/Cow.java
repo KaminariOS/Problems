@@ -14,7 +14,7 @@ public class Cow {
     int x;
     int y;
     int consumption;
-    private static final int LIMIT = 1000000000;
+    private static final int LIMIT = 1000_000_000;
     private static final Set<Point> farm = new HashSet<>();
     public void eat(List<Cow> infinity){
         if (!inRange()){
@@ -104,8 +104,8 @@ public class Cow {
 
     public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
-        File file = new File("src/test.md");
-        scanner = new Scanner(file);
+        //File file = new File("src/test.md");
+        // scanner = new Scanner(file);
         int cowCount = scanner.nextInt();
         Cow[] cows = new Cow[cowCount];
         int i = 0;
