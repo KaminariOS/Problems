@@ -2,7 +2,6 @@ package CowEatingGrass;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.security.cert.PolicyNode;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -117,23 +116,17 @@ public class Cow {
         List<Cow> walkingCows = Arrays.asList(cows);
         List<Cow> infinity = new ArrayList<>();
         while (!walkingCows.isEmpty()){
-            List<Cow> temp = getMax(walkingCows, infinity);
-            infinity.addAll(temp);
+            infinity.addAll(filterWithInfinity(getMax(walkingCows), infinity));
             walkingCows = walkingCows.stream().filter(cow -> !cow.hasStopped).collect(Collectors.toList());
 
             walkingCows.forEach(e -> e.eat(infinity));
             walkingCows.forEach(Cow::move);
-
-
             walkingCows = walkingCows.stream().filter(cow -> !cow.hasStopped).collect(Collectors.toList());
-
-
-
         }
         Arrays.stream(cows).forEach(Cow::printConsumption);
     }
 
-    public static List<Cow> getMax(List<Cow> walkingCows, List<Cow> infinity) {
+    public static List<Cow> getMax(List<Cow> walkingCows) {
         Cow maxX = walkingCows.get(0);
         Cow maxY = walkingCows.get(0);
         for (Cow e :walkingCows){
@@ -141,13 +134,18 @@ public class Cow {
             maxY = (e.y >= maxY.y)? e : maxY;
         }
         List<Cow> temp = new ArrayList<>();
-        List<Cow> result = new ArrayList<>();
+
         if (!maxX.isFacingNorth){
             temp.add(maxX);
         }
         if (maxY.isFacingNorth){
             temp.add(maxY);
         }
+        return temp;
+    }
+
+    private static List<Cow> filterWithInfinity(List<Cow> temp, List<Cow> infinity){
+        List<Cow> result = new ArrayList<>();
         for (Cow cow : temp){
             if (cow.cross(infinity) || farm.contains(new Point(cow.x, cow.y))){
                 continue;
